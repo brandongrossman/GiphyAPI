@@ -19,7 +19,9 @@ namespace GiphyAPI.Controllers
             _context = context;
         }
 
-
+        /*
+         * Returns Gif Ratings by GifId
+         */
         [HttpGet("gif/{id}")]
         public Object GetGifRatings(string id)
         {

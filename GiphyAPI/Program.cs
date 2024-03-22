@@ -20,8 +20,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: specificOrgins,
                       policy =>
                       {
-                          policy.WithOrigins("http://127.0.0.1:5500").AllowAnyHeader().AllowAnyMethod();
-                          //policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                          //policy.WithOrigins("http://127.0.0.1:5500").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                          policy.SetIsOriginAllowed(origin => true)
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()                            
+                            .AllowCredentials();
                       });
 });
 //CORS
@@ -43,6 +46,7 @@ app.MapIdentityApi<IdentityUser>();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
