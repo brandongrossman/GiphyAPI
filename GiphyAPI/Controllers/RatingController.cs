@@ -21,11 +21,11 @@ namespace GiphyAPI.Controllers
 
 
         [HttpGet("gif/{id}")]
-        public ActionResult<List<GifRatingAPI>> GetGifRatings(string id)
+        public Object GetGifRatings(string id)
         {
             //var gifRatings = _context.GifRatings.Where(x => x.GifId == id).ToList();
             //return gifRatings;
-            var data = from User in _context.Users
+            var gifRatingAPI = from User in _context.Users
                        from Ratings in _context.GifRatings
 
                        where (Ratings.GifId == id && User.Id == Ratings.UserId)
@@ -36,13 +36,8 @@ namespace GiphyAPI.Controllers
                            Username = User.UserName,
                            Rating = Ratings.Rating
                        };
-            GifRatingAPI[] gifRatings = new GifRatingAPI[data.ToList().Count()];
-            foreach(var x in data)
-            {
-                gifRatings.Append(new GifRatingAPI { GifId = x.GifId, Username = x.Username, Rating = x.Rating });
-            }
-             
-            return gifRatings.ToList();
+
+            return gifRatingAPI;
         }
 
         //// GET: RatingController/Create
