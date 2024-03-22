@@ -23,8 +23,6 @@ namespace GiphyAPI.Controllers
         [HttpGet("gif/{id}")]
         public Object GetGifRatings(string id)
         {
-            //var gifRatings = _context.GifRatings.Where(x => x.GifId == id).ToList();
-            //return gifRatings;
             var gifRatingAPI = from User in _context.Users
                        from Ratings in _context.GifRatings
 
