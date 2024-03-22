@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GiphyAPI.Models.GifByID
+namespace GiphyAPI.Models.GiphyAPIResponses
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class _480wStill2

@@ -51,6 +51,34 @@ namespace GiphyAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GifComments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GifId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GifComments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GifRatings",
+                columns: table => new
+                {
+                    GifId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GifRatings", x => new { x.GifId, x.UserId });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -213,6 +241,12 @@ namespace GiphyAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "GifComments");
+
+            migrationBuilder.DropTable(
+                name: "GifRatings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

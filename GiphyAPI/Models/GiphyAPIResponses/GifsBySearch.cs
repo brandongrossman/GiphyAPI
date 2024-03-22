@@ -1,4 +1,4 @@
-﻿namespace GiphyAPI.Models.GifsBySearch
+﻿namespace GiphyAPI.Models.GiphyAPIResponses
 {
 
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);

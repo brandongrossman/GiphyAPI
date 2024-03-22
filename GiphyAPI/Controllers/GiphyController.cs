@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
-using GiphyAPI.Models.GifByID;
-using GiphyAPI.Models.GifsBySearch;
+using GiphyAPI.Models.GiphyAPIResponses;
+using GiphyAPI.Models;
 
 namespace GiphyAPI.Controllers
 {
@@ -17,34 +17,6 @@ namespace GiphyAPI.Controllers
         private const string URL = "https://api.giphy.com/v1/";
         private const string APIKEY = "?api_key=saMQVcoYx6lbNc21aDGpl86wwZVKm5cm";
         //private const string RATING = "&rating=g";
-
-        [HttpGet("gifs/{id}")]
-        public async Task<ActionResult<GifByID>> GetGifsById(string id)
-        {
-            GifByID gif;
-            string path = "gifs/" + id;
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL + path);
-
-            //adds an accept header for JSON format
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            //lists data response
-            HttpResponseMessage response = client.GetAsync(APIKEY).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                //sets successfull response to object to be returned
-                gif = await response.Content.ReadAsAsync<GifByID>();
-            }
-            else
-            {
-                //returns not found response
-                return NotFound();
-            }
-
-            client.Dispose();
-            return gif;
-        }
 
         [HttpGet("gifs/search/{search}/{offset}")]
         public async Task<ActionResult<GifsBySearch>> GetGifsBySearch(string search, string offset)
@@ -75,5 +47,32 @@ namespace GiphyAPI.Controllers
             return gifs;
         }
 
+        [HttpGet("gifs/{id}")]
+        public async Task<ActionResult<GifByID>> GetGifsById(string id)
+        {
+            GifByID gif;
+            string path = "gifs/" + id;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL + path);
+
+            //adds an accept header for JSON format
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //lists data response
+            HttpResponseMessage response = client.GetAsync(APIKEY).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                //sets successfull response to object to be returned
+                gif = await response.Content.ReadAsAsync<GifByID>();
+            }
+            else
+            {
+                //returns not found response
+                return NotFound();
+            }
+
+            client.Dispose();
+            return gif;
+        }
     }
 }

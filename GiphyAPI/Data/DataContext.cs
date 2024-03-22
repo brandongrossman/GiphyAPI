@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using GiphyAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GiphyAPI.Data
@@ -9,5 +10,8 @@ namespace GiphyAPI.Data
         {
 
         }
+
+        public DbSet<GifRating> GifRatings { get; set; }
+        public DbSet<GifComment> GifComments { get; set; }
     }
 }
