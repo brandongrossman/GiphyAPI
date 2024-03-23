@@ -1,11 +1,7 @@
-﻿using Azure.Identity;
-using GiphyAPI.Data;
+﻿using GiphyAPI.Data;
 using GiphyAPI.Models;
-using GiphyAPI.Models.GiphyAPIResponses;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol;
-using System.Text.Json.Nodes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GiphyAPI.Controllers
 {
@@ -22,29 +18,30 @@ namespace GiphyAPI.Controllers
         /*
          * Returns Gif Ratings by GifId
          */
-        [HttpGet("gif/{id}")]
-        public Object GetGifRatings(string id)
+        [HttpGet("gif/{gifId}")]
+        public Object GetGifRatings(string gifId)
         {
-            var gifRatingAPI = from User in _context.Users
+            var gifRatings = from User in _context.Users
                                from Ratings in _context.GifRatings
 
-                               where (Ratings.GifId == id && User.Id == Ratings.UserId)
+                               where (Ratings.GifId == gifId && User.Id == Ratings.UserId)
 
                                select new
                                {
                                    GifId = Ratings.GifId,
+                                   UserId = User.Id,
                                    Username = User.UserName,
                                    Rating = Ratings.Rating
                                };
 
-            return gifRatingAPI;
+            return gifRatings;
         }
 
         /*
          * Creates or Updates Gif Rating depending if the rating already exists
          */
         [HttpPost("gif/update/{gifId}/{userId}/{rating}")]
-        public async Task<ActionResult> CreateGifRating(string gifId, string userId, int rating)
+        public async Task<ActionResult> UpdateGifRating(string gifId, string userId, int rating)
         {
             var existingGifRating = _context.GifRatings.Where(x => (x.GifId == gifId) && (x.UserId == userId));
             if (existingGifRating.Count() == 0)
@@ -62,7 +59,7 @@ namespace GiphyAPI.Controllers
          * Deletes a Gif Rating
          */
         [HttpDelete("gif/delete/{gifId}/{userId}")]
-        public async Task<ActionResult> CreateGifRating(string gifId, string userId)
+        public async Task<ActionResult> DeleteGifRating(string gifId, string userId)
         {
             _context.GifRatings.Remove(new GifRating { GifId = gifId, UserId = userId });
             await _context.SaveChangesAsync();

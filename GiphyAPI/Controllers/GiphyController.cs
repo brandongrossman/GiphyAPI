@@ -15,7 +15,7 @@ namespace GiphyAPI.Controllers
     {
         //sets URL for Giphy API Path and API Key for Giphy API
         private const string URL = "https://api.giphy.com/v1/";
-        private const string APIKEY = "?api_key=saMQVcoYx6lbNc21aDGpl86wwZVKm5cm";
+        private const string APIKEY = "?api_key=tdWeQn6VTuJrDTZZUVPnoRXxospotafI"; //saMQVcoYx6lbNc21aDGpl86wwZVKm5cm
         //private const string RATING = "&rating=g";
 
         [HttpGet("gifs/search/{search}/{offset}")]
@@ -47,11 +47,11 @@ namespace GiphyAPI.Controllers
             return gifs;
         }
 
-        [HttpGet("gifs/{id}")]
-        public async Task<ActionResult<GifByID>> GetGifsById(string id)
+        [HttpGet("gifs/{gifId}")]
+        public async Task<ActionResult<GifByID>> GetGifsById(string gifId)
         {
             GifByID gif;
-            string path = "gifs/" + id;
+            string path = "gifs/" + gifId;
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(URL + path);
 
