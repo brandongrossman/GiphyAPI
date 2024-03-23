@@ -47,7 +47,7 @@ namespace GiphyAPI.Controllers
         public async Task<ActionResult> CreateGifRating(string gifId, string userId, int rating)
         {
             var existingGifRating = _context.GifRatings.Where(x => (x.GifId == gifId) && (x.UserId == userId));
-            if(existingGifRating.Count() == 0)
+            if (existingGifRating.Count() == 0)
             {
                 await _context.GifRatings.AddAsync(new GifRating { GifId = gifId, UserId = userId, Rating = rating });
                 await _context.SaveChangesAsync();
@@ -58,67 +58,15 @@ namespace GiphyAPI.Controllers
             return Ok();
         }
 
-        //// GET: RatingController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: RatingController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: RatingController/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: RatingController/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: RatingController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: RatingController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        /*
+         * Deletes a Gif Rating
+         */
+        [HttpDelete("gif/delete/{gifId}/{userId}")]
+        public async Task<ActionResult> CreateGifRating(string gifId, string userId)
+        {
+            _context.GifRatings.Remove(new GifRating { GifId = gifId, UserId = userId });
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }
