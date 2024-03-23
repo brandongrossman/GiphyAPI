@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 using GiphyAPI.Models.GiphyAPIResponses;
-using GiphyAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GiphyAPI.Controllers
 {
