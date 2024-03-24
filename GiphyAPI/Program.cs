@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using System.Security.Cryptography;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,10 +33,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy("policies",
                       policy =>
                       {
-                          policy.WithOrigins("http://127.0.0.1:5500")
+                          policy.AllowAnyOrigin()//.WithOrigins("http://127.0.0.1:5500")
                             .AllowAnyMethod()
-                            .AllowAnyHeader()                 
-                            .AllowCredentials();
+                            .AllowAnyHeader();
+                            //.AllowCredentials();
                       });
 });
 
@@ -50,26 +49,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapIdentityApi<IdentityUser>();
+
 //CORS
 app.UseCors("policies");
-
-//app.Use(async(request, next) =>
-//{
-//    request.Response.Headers["Access-Control-Allow-Origin"] = "http://127.0.0.1:5500";
-  
-//    if (HttpMethods.IsOptions(request.Request.Method))
-//    {
-//        request.Response.Headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
-//        request.Response.Headers["Access-Control-Allow-Headers"] = "Content-Type";
-//        request.Response.Headers["Access-Control-Allow-Credentials"] = "true";
-//        await request.Response.CompleteAsync();
-//        return;
-//    }
-
-//    await next();
-//});
-
-app.MapIdentityApi<IdentityUser>();
 
 app.UseHttpsRedirection();
 
