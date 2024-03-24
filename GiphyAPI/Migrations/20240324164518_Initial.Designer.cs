@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GiphyAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240322140543_Initial")]
+    [Migration("20240324164518_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
