@@ -1,0 +1,34 @@
+.black-background{
+    background-color: black;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.star {
+  border: none;
+  float: left;
+}
+
+.star>input {
+  display: none;
+}
+
+.star>label:before {
+  margin: 5px;
+  display: inline-block;
+}
+
+.star>label {
+  color: gray;
+  float: right;
+}
+
+.star>input:checked~label, .star:not(:checked)>label:hover, .star:not(:checked)>label:hover~label {
+  color: white;
+}
+
+.star>input:checked+label:hover, .star>input:checked~label:hover, .star>label:hover~input:checked~label, .star>input:checked~label:hover~label {
+  color:azure;
+}

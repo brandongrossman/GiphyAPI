@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Giphy API Client</title>
+        <link rel="icon" href="images/Icon.png">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="giphy.js" async=""></script>
+        <link href="styles/style.css" rel="stylesheet">
+    </head>
+    <body class="mt-5 bg-light">
+        <nav class="nav nav-fill fixed-top black-background text-white">
+            <div class="row nav-item">
+                <div class="col-4"></div>
+                <div class="col-3 mt-2 mb-2">
+                    <a class="navbar-text" href=""><img src="images/Logo.gif" class="img-fluid"></a>
+                </div>
+                <div class="col-5"></div>
+            </div>
+            <form class="row nav-item mt-3 mb-3" method="post">
+                <div class="col-3"></div>
+                <div class="col-3">
+                    <input type="email" class="form-control" id="email" placeholder="example@domain.com">
+                </div>
+                <div class="col-3">
+                    <input type="password" class="form-control" id="password" placeholder="password">
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-light" onclick="login()">Log In</button>
+                </div>
+                <div class="col-1"></div>
+            </form>
+        </nav>
+        <div class="row">
+            <div class="col-9">
+                <br/><br/><br/><br/>
+                <div class="row">
+                    <!-- Search -->
+                    <div class="col-1"></div>
+                    <div class="col-5">
+                        <input class="form-control" id="argument" placeholder="Type to search...">
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-dark form-control" onclick="search(0)">Search</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-dark form-control" onclick="trending(0)">Trending</button>
+                    </div>
+                    <!-- Search Results -->
+                    <br/><br/><br/>
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <div id="results"></div>
+                        <div class="row">
+                            <div class="col-5"></div>
+                            <div class="col-2 text-center">
+                                <div id="more-results-button"></div>
+                            </div>
+                            <div class="col-5"></div>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+            <div class="col-3">
+                <!-- Side Bar -->
+                <div id="sidebar"></div>
+            </div>
+        </div>
+        <br/><br/><br/>
+    </body>
+</html>
