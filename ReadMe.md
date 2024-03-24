@@ -2,6 +2,8 @@ If not already installed, install SQL Server 2022 Express: https://go.microsoft.
 
 Clone the repository in Visual Studio 2022
 
+In appsettings.json, verify the connection string "DefaultConnection" string is accurate
+
 In NuGet Packet Manager Console, navigate to ...\GiphyAPI\GiphyAPI
 
 Run the following commands to update the database
