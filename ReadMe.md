@@ -13,3 +13,5 @@ dotnet tool install --global dotnet-ef
 dotnet ef database update
 
 Run the project
+
+Use Swagger UI to register to create a user which can be referenced in the client application
