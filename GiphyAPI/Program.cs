@@ -23,6 +23,9 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddAuthorization();
+
 builder.Services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<DataContext>();
 
 //CORS
@@ -50,26 +53,26 @@ if (app.Environment.IsDevelopment())
 //CORS
 app.UseCors("policies");
 
-app.Use(async(request, next) =>
-{
-    request.Response.Headers["Access-Control-Allow-Origin"] = "http://127.0.0.1:5500";
+//app.Use(async(request, next) =>
+//{
+//    request.Response.Headers["Access-Control-Allow-Origin"] = "http://127.0.0.1:5500";
   
-    if (HttpMethods.IsOptions(request.Request.Method))
-    {
-        request.Response.Headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
-        request.Response.Headers["Access-Control-Allow-Headers"] = "Content-Type";
-        request.Response.Headers["Access-Control-Allow-Credentials"] = "true";
-        await request.Response.CompleteAsync();
-        return;
-    }
+//    if (HttpMethods.IsOptions(request.Request.Method))
+//    {
+//        request.Response.Headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+//        request.Response.Headers["Access-Control-Allow-Headers"] = "Content-Type";
+//        request.Response.Headers["Access-Control-Allow-Credentials"] = "true";
+//        await request.Response.CompleteAsync();
+//        return;
+//    }
 
-    await next();
-});
+//    await next();
+//});
 
 app.MapIdentityApi<IdentityUser>();
 
 app.UseHttpsRedirection();
-app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
