@@ -14,6 +14,6 @@ dotnet ef database update
 
 Run the project
 
-Use Swagger UI to register to create a user which can be referenced in the client application
+Use Swagger UI to register a user which can be referenced in the client application
 
 Open ...\GiphyAPI\GiphyClient\index.html with a browser to run the client application
