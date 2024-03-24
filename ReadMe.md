@@ -5,7 +5,9 @@ Clone the repository in Visual Studio 2022
 In NuGet Packet Manager Console, navigate to ...\GiphyAPI\GiphyAPI
 
 Run the following commands to update the database
+
 dotnet tool install --global dotnet-ef
+
 dotnet ef database update
 
 Run the project
